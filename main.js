@@ -18,8 +18,8 @@ const escapeHTML = (input) => {
 
 //Hàm lấy ra các element trong form-group,
 // có thể thêm tham số parent thay (".form-group") để mở rộng khả năng tìm kiếm
-const getElementInGroup = (element, type) => {
-  return element.closest(".form-group").querySelector(type);
+const getElementInGroup = (element, selector) => {
+  return element.closest(".form-group").querySelector(selector);
 };
 
 //Hàm sử dụng chung để thông báo
@@ -150,6 +150,7 @@ formEl.addEventListener("submit", (e) => {
   });
 
   if (isValidForm) {
+    //Logic khi đã nhập đúng hết các trường
     overlayEl.classList.remove("hidden");
     notifyEl.classList.remove("hidden");
   }
