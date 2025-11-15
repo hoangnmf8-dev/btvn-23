@@ -7,7 +7,12 @@ const formEl = $("#register");
 const overlayEl = $(".overlay");
 const notifyEl = $(".notify");
 
-const checkFuncObj = {};
+const checkFuncObj = {
+  username: [],
+  email: [],
+  password: [],
+  confirmation: []
+};
 
 //Hàm làm sạch đầu vào
 const escapeHTML = (input) => {
@@ -50,8 +55,12 @@ const validateFunc = (e, input, callback) => {
   return true;
 };
 
+/* Tách riêng logic kiểm tra ở các trường để dễ mở rộng khi có thêm input và 
+dễ sửa lỗi ở các hàm check riêng biệt, tránh sửa lỗi vào logic chung */
+/* Có thể mở rộng thêm logic check các lỗi cho từng input. VD: độ dài lớn hơn 8 ký tự, hoa, thường, có chữ số, 
+kí tự đặc biệt,.... Với bài tập này chưa yêu cầu những nội dung trên */
+
 //Check username
-checkFuncObj.username = [];
 const checkUser = (inputValue) => {
   let isValid = true;
   let errorText;
@@ -68,7 +77,6 @@ checkFuncObj.username.push(usernameInput);
 checkFuncObj.username.push(checkUser);
 
 //Check email
-checkFuncObj.email = [];
 const checkEmail = (inputValue) => {
   let isValid = true;
   let errorText;
@@ -86,7 +94,6 @@ checkFuncObj.email.push(emailInput);
 checkFuncObj.email.push(checkEmail);
 
 //Check password
-checkFuncObj.password = [];
 const checkPassword = (inputValue) => {
   let isValid = true;
   let errorText;
@@ -103,7 +110,6 @@ checkFuncObj.password.push(passwordInput);
 checkFuncObj.password.push(checkPassword);
 
 //Check comfirmation password
-checkFuncObj.confirmation = [];
 const checkConfirmation = (inputValue) => {
   let isValid = true;
   let errorText;
@@ -134,6 +140,7 @@ emailInput.addEventListener("input", (e) => {
 
 passwordInput.addEventListener("input", (e) => {
   validateFunc(e, null, checkFuncObj.password[1]);
+  validateFunc(null, confirmationInput, checkFuncObj.confirmation[1]); // Khi password và confirmation đã nhập và match với nhau, nhưng sau đó password thay đổi thì confirmation cũng phải được kiểm tra lại 
 });
 
 confirmationInput.addEventListener("input", (e) => {
