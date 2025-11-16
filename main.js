@@ -140,7 +140,7 @@ emailInput.addEventListener("input", (e) => {
 
 passwordInput.addEventListener("input", (e) => {
   validateFunc(e, null, checkFuncObj.password[1]);
-  validateFunc(null, confirmationInput, checkFuncObj.confirmation[1]); // Khi password và confirmation đã nhập và match với nhau, nhưng sau đó password thay đổi thì confirmation cũng phải được kiểm tra lại 
+  if(confirmationInput.value) validateFunc(null, confirmationInput, checkFuncObj.confirmation[1]); // Khi password và confirmation đã nhập và match với nhau, nhưng sau đó password thay đổi thì confirmation cũng phải được kiểm tra lại 
 });
 
 confirmationInput.addEventListener("input", (e) => {
